@@ -1,23 +1,33 @@
 pipeline {
-    agent any
-    stages {
-        stage('Build') {
-            steps {
-                // Add your build steps here
-                sh 'echo "Building..."'
-            }
-        }
-        stage('Test') {
-            steps {
-                // Add your test steps here
-                sh 'echo "Testing..."'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                // Add your deployment steps here
-                sh 'echo "Deploying..."'
-            }
-        }
-    }
+ agent any
+ environment {
+    MAVEN_HOME = tool 'maven'
+    JAVA_HOME = tool 'jdk'
+ }
+
+ stages {
+ stage('Checkout') {
+ steps {
+ git branch: 'main', url: 'https://github.com/eemelimu/FarToCel.git'
+ }
+ }
+ stage('Build') {
+ steps {
+ bat "\"${env.MAVEN_HOME}bin\\mvn.cmd\" clean install"
+ }
+ }
+ stage('Test') {
+ steps{
+ bat "\"${env.MAVEN_HOME}bin\\mvn.cmd\" test"
+ }
+ post {
+ success {
+ // Publish JUnit test results
+ junit '**/target/surefire-reports/TEST-*.xml'
+ // Generate JaCoCo code coverage report
+ jacoco(execPattern: '**/target/jacoco.exec')
+ }
+ }
+ }
+ }
 }
