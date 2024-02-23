@@ -4,19 +4,19 @@ pipeline {
         stage('Build') {
             steps {
                 // Add your build steps here
-                sh 'echo "Building..."'
+                bat 'echo "Building..."'
             }
         }
         stage('Test') {
             steps {
                 // Add your test steps here
-                sh 'echo "Testing..."'
+                bat 'echo "Testing..."'
             }
         }
         stage('Deploy') {
             steps {
                 // Add your deployment steps here
-                sh 'echo "Deploying..."'
+                bat 'echo "Deploying..."'
             }
         }
     }
