@@ -3,20 +3,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Add your build steps here
-                bat 'echo "Building..."'
+                bat 'mvn clean install'
             }
         }
         stage('Test') {
             steps {
-                // Add your test steps here
-                bat 'echo "Testing..."'
+                bat 'mvn test'
             }
-        }
-        stage('Deploy') {
-            steps {
-                // Add your deployment steps here
-                bat 'echo "Deploying..."'
+            post {
+                success {
+                    junit'**/target/surefire-reports/TEST-*.xml'
+                    jacoco(execPattern:'**/target/jaclcl.exec')
+                }
             }
         }
     }
