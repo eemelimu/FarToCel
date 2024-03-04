@@ -9,8 +9,14 @@ public class App {
         return (float) (kelvin - 273.15);
     }
 
-
     public static float KelToFar(float kelvin) {
         return (float) ((kelvin -273.15) * 9/5 + 32);
+    }
+
+    public static void main(String[] args) {
+        App app = new App();
+        System.out.println(app.toCelsius(32));
+        System.out.println(App.kelvinToCelsius(273.15F));
+        System.out.println(App.KelToFar(273.15F));
     }
 }
