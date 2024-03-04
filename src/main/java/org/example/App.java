@@ -8,4 +8,8 @@ public class App {
     public static float kelvinToCelsius(float kelvin) {
         return (float) (kelvin - 273.15);
     }
+
+    public static float KelToFar(float kelvin) {
+        return (float) ((kelvin -273.15) * 9/5 + 32);
+    }
 }

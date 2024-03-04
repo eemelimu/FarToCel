@@ -25,4 +25,9 @@ public class AppTest  {
         assertEquals(0, result, 0.001);
     }
 
+    @Test
+    void KelToFar() {
+        float result = App.KelToFar(273.15F);
+        assertEquals(32, result, 0.001);
+    }
 }
